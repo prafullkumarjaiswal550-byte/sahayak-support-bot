@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as OfficerRouteImport } from './routes/officer'
+import { Route as SupportDirectoryRouteImport } from './routes/support-directory'
 import { Route as VictimRouteImport } from './routes/victim'
 import { Route as CaseIdRouteImport } from './routes/case.$id'
 
@@ -36,6 +37,11 @@ const OfficerRoute = OfficerRouteImport.update({
   path: '/officer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupportDirectoryRoute = SupportDirectoryRouteImport.update({
+  id: '/support-directory',
+  path: '/support-directory',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VictimRoute = VictimRouteImport.update({
   id: '/victim',
   path: '/victim',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/assessment': typeof AssessmentRoute
   '/officer': typeof OfficerRoute
+  '/support-directory': typeof SupportDirectoryRoute
   '/victim': typeof VictimRoute
   '/case/$id': typeof CaseIdRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/assessment': typeof AssessmentRoute
   '/officer': typeof OfficerRoute
+  '/support-directory': typeof SupportDirectoryRoute
   '/victim': typeof VictimRoute
   '/case/$id': typeof CaseIdRoute
 }
@@ -69,21 +77,36 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/assessment': typeof AssessmentRoute
   '/officer': typeof OfficerRoute
+  '/support-directory': typeof SupportDirectoryRoute
   '/victim': typeof VictimRoute
   '/case/$id': typeof CaseIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/assessment' | '/officer' | '/victim' | '/case/$id'
+    | '/'
+    | '/about'
+    | '/assessment'
+    | '/officer'
+    | '/support-directory'
+    | '/victim'
+    | '/case/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/assessment' | '/officer' | '/victim' | '/case/$id'
+  to:
+    | '/'
+    | '/about'
+    | '/assessment'
+    | '/officer'
+    | '/support-directory'
+    | '/victim'
+    | '/case/$id'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/assessment'
     | '/officer'
+    | '/support-directory'
     | '/victim'
     | '/case/$id'
   fileRoutesById: FileRoutesById
@@ -93,6 +116,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AssessmentRoute: typeof AssessmentRoute
   OfficerRoute: typeof OfficerRoute
+  SupportDirectoryRoute: typeof SupportDirectoryRoute
   VictimRoute: typeof VictimRoute
   CaseIdRoute: typeof CaseIdRoute
 }
@@ -127,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfficerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/support-directory': {
+      id: '/support-directory'
+      path: '/support-directory'
+      fullPath: '/support-directory'
+      preLoaderRoute: typeof SupportDirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/victim': {
       id: '/victim'
       path: '/victim'
@@ -149,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AssessmentRoute: AssessmentRoute,
   OfficerRoute: OfficerRoute,
+  SupportDirectoryRoute: SupportDirectoryRoute,
   VictimRoute: VictimRoute,
   CaseIdRoute: CaseIdRoute,
 }
