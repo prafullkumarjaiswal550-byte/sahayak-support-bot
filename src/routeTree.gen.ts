@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AssessmentRouteImport } from './routes/assessment'
+import { Route as OfficerRouteImport } from './routes/officer'
+import { Route as SupportDirectoryRouteImport } from './routes/support-directory'
 import { Route as VictimRouteImport } from './routes/victim'
+import { Route as CaseIdRouteImport } from './routes/case.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +27,98 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssessmentRoute = AssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfficerRoute = OfficerRouteImport.update({
+  id: '/officer',
+  path: '/officer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportDirectoryRoute = SupportDirectoryRouteImport.update({
+  id: '/support-directory',
+  path: '/support-directory',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VictimRoute = VictimRouteImport.update({
   id: '/victim',
   path: '/victim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseIdRoute = CaseIdRouteImport.update({
+  id: '/case/$id',
+  path: '/case/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/assessment': typeof AssessmentRoute
+  '/officer': typeof OfficerRoute
+  '/support-directory': typeof SupportDirectoryRoute
   '/victim': typeof VictimRoute
+  '/case/$id': typeof CaseIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/assessment': typeof AssessmentRoute
+  '/officer': typeof OfficerRoute
+  '/support-directory': typeof SupportDirectoryRoute
   '/victim': typeof VictimRoute
+  '/case/$id': typeof CaseIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/assessment': typeof AssessmentRoute
+  '/officer': typeof OfficerRoute
+  '/support-directory': typeof SupportDirectoryRoute
   '/victim': typeof VictimRoute
+  '/case/$id': typeof CaseIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/victim'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/assessment'
+    | '/officer'
+    | '/support-directory'
+    | '/victim'
+    | '/case/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/victim'
-  id: '__root__' | '/' | '/about' | '/victim'
+  to:
+    | '/'
+    | '/about'
+    | '/assessment'
+    | '/officer'
+    | '/support-directory'
+    | '/victim'
+    | '/case/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/assessment'
+    | '/officer'
+    | '/support-directory'
+    | '/victim'
+    | '/case/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AssessmentRoute: typeof AssessmentRoute
+  OfficerRoute: typeof OfficerRoute
+  SupportDirectoryRoute: typeof SupportDirectoryRoute
   VictimRoute: typeof VictimRoute
+  CaseIdRoute: typeof CaseIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +137,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/assessment': {
+      id: '/assessment'
+      path: '/assessment'
+      fullPath: '/assessment'
+      preLoaderRoute: typeof AssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/officer': {
+      id: '/officer'
+      path: '/officer'
+      fullPath: '/officer'
+      preLoaderRoute: typeof OfficerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support-directory': {
+      id: '/support-directory'
+      path: '/support-directory'
+      fullPath: '/support-directory'
+      preLoaderRoute: typeof SupportDirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/victim': {
       id: '/victim'
       path: '/victim'
       fullPath: '/victim'
       preLoaderRoute: typeof VictimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case/$id': {
+      id: '/case/$id'
+      path: '/case/$id'
+      fullPath: '/case/$id'
+      preLoaderRoute: typeof CaseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +178,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AssessmentRoute: AssessmentRoute,
+  OfficerRoute: OfficerRoute,
+  SupportDirectoryRoute: SupportDirectoryRoute,
   VictimRoute: VictimRoute,
+  CaseIdRoute: CaseIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
