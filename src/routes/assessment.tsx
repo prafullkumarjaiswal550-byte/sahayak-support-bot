@@ -11,7 +11,7 @@ import { useSahayakState } from "@/lib/sahayak/store";
 
 export const Route = createFileRoute("/assessment")({
   validateSearch: (search: Record<string, unknown>) => ({
-    case: typeof search.case === "string" ? search.case : "",
+    case: typeof search["case"] === "string" ? (search["case"] as string) : "",
   }),
   head: () => ({
     meta: [

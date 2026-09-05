@@ -69,6 +69,7 @@ function OfficerDashboard() {
 
   function simulateIncoming() {
     const sample = SAMPLE_NARRATIVES[Math.floor(Math.random() * SAMPLE_NARRATIVES.length)];
+    if (!sample) return;
     createCase({
       analysis: runRuleBasedAnalysis(sample.text),
       language: sample.language,
