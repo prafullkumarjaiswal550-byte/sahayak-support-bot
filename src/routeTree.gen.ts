@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AssessmentRouteImport } from './routes/assessment'
+import { Route as OfficerRouteImport } from './routes/officer'
 import { Route as VictimRouteImport } from './routes/victim'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const AssessmentRoute = AssessmentRouteImport.update({
   path: '/assessment',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OfficerRoute = OfficerRouteImport.update({
+  id: '/officer',
+  path: '/officer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VictimRoute = VictimRouteImport.update({
   id: '/victim',
   path: '/victim',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/assessment': typeof AssessmentRoute
+  '/officer': typeof OfficerRoute
   '/victim': typeof VictimRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/assessment': typeof AssessmentRoute
+  '/officer': typeof OfficerRoute
   '/victim': typeof VictimRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/assessment': typeof AssessmentRoute
+  '/officer': typeof OfficerRoute
   '/victim': typeof VictimRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/assessment' | '/victim'
+  fullPaths: '/' | '/about' | '/assessment' | '/officer' | '/victim'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/assessment' | '/victim'
-  id: '__root__' | '/' | '/about' | '/assessment' | '/victim'
+  to: '/' | '/about' | '/assessment' | '/officer' | '/victim'
+  id: '__root__' | '/' | '/about' | '/assessment' | '/officer' | '/victim'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AssessmentRoute: typeof AssessmentRoute
+  OfficerRoute: typeof OfficerRoute
   VictimRoute: typeof VictimRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AssessmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/officer': {
+      id: '/officer'
+      path: '/officer'
+      fullPath: '/officer'
+      preLoaderRoute: typeof OfficerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/victim': {
       id: '/victim'
       path: '/victim'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AssessmentRoute: AssessmentRoute,
+  OfficerRoute: OfficerRoute,
   VictimRoute: VictimRoute,
 }
 export const routeTree = rootRouteImport
