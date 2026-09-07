@@ -24,6 +24,7 @@ export function AppHeader({
         <Logo />
         <nav aria-label="Main" className="ml-auto hidden items-center gap-1 lg:flex">
           <HeaderLink to="/victim">Get support</HeaderLink>
+          <HeaderLink to="/rights-guidance">Rights guidance</HeaderLink>
           <HeaderLink to="/officer">Officer dashboard</HeaderLink>
           <HeaderLink to="/support-directory">Support directory</HeaderLink>
           <HeaderLink to="/about">Privacy &amp; ethics</HeaderLink>
@@ -73,6 +74,7 @@ export function AppHeader({
             </summary>
             <nav aria-label="Mobile" className="absolute right-0 top-12 w-64 rounded-lg border border-border bg-card p-2 shadow-lift">
               <HeaderLink to="/victim">Get support</HeaderLink>
+              <HeaderLink to="/rights-guidance">Rights guidance</HeaderLink>
               <HeaderLink to="/officer">Officer dashboard</HeaderLink>
               <HeaderLink to="/support-directory">Support directory</HeaderLink>
               <HeaderLink to="/about">Privacy &amp; ethics</HeaderLink>
