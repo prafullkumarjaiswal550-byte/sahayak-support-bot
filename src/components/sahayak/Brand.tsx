@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
+import { useLanguage } from "@/lib/sahayak/language";
 
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
@@ -31,13 +32,13 @@ export function DemoBadge({ label = "DEMO DATA" }: { label?: string }) {
 }
 
 export function Disclaimer({ className = "" }: { className?: string }) {
+  const { t } = useLanguage();
   return (
     <p
       role="note"
       className={`rounded-md border-l-4 border-teal bg-navy-soft px-4 py-3 text-sm text-foreground ${className}`}
     >
-      This is a preliminary screening result, not a clinical diagnosis. A trained counsellor or
-      authorized officer must review the case.
+      {t("disclaimer")}
     </p>
   );
 }
