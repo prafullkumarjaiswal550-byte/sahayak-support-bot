@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, DoorOpen, HeartHandshake, Radar, UserCheck, ShieldCheck } from "lucide-react";
+import { ArrowRight, DoorOpen, HeartHandshake, Phone, UserCheck, ShieldCheck } from "lucide-react";
 import { AppFooter, AppHeader } from "@/components/sahayak/AppHeader";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/sahayak/language";
 
 const TITLE = "SAHAYAK — AI-Assisted Trauma & Vulnerability Assessment for NHAA";
 const DESC =
@@ -21,100 +22,97 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const FEATURES = [
-  {
-    icon: HeartHandshake,
-    title: "Trauma-informed interaction",
-    body: "Calm, non-judgmental language, consent before any analysis, and the ability to pause or leave at any moment.",
-  },
-  {
-    icon: Radar,
-    title: "Real-time support prioritization",
-    body: "A transparent Stress Vulnerability Index helps teams reach the people who may need urgent support first.",
-  },
-  {
-    icon: UserCheck,
-    title: "Human-in-the-loop escalation",
-    body: "Every recommendation is a suggestion. A trained counsellor or authorized officer makes the final decision.",
-  },
-];
-
 function Landing() {
+  const { t } = useLanguage();
+
+  const steps = [
+    { n: "1", title: t("step1T"), body: t("step1B") },
+    { n: "2", title: t("step2T"), body: t("step2B") },
+    { n: "3", title: t("step3T"), body: t("step3B") },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
       <main>
         <section className="border-b border-border bg-card">
-          <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6">
+          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
             <div className="flex flex-col gap-3 rounded-lg border border-teal/30 bg-teal-soft px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-teal-foreground"><strong>Need immediate help?</strong> If you are in danger, call emergency services at 112 or NHAA at 14566.</p>
+              <p className="flex items-center gap-2 text-base font-medium text-teal-foreground">
+                <Phone className="h-5 w-5 shrink-0" aria-hidden="true" /> {t("emergencyHelp")}
+              </p>
               <Button asChild variant="outline" size="sm" className="shrink-0 border-teal/40">
-                <Link to="/support-directory"><DoorOpen aria-hidden="true" /> Find support</Link>
+                <Link to="/support-directory">
+                  <DoorOpen aria-hidden="true" /> {t("findSupport")}
+                </Link>
               </Button>
             </div>
           </div>
         </section>
 
         <section className="bg-background">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
             <span className="inline-flex items-center gap-2 rounded-full border border-teal/35 bg-teal-soft px-3 py-1 text-xs font-semibold uppercase text-teal-foreground">
               <ShieldCheck className="h-4 w-4" aria-hidden="true" /> Smart India Hackathon · SIH26093
             </span>
-            <div className="mt-6 max-w-4xl">
-              <h1 className="text-4xl leading-tight font-bold text-primary sm:text-5xl lg:text-6xl">SAHAYAK</h1>
-              <p className="mt-5 max-w-3xl font-display text-2xl leading-relaxed text-foreground sm:text-3xl">Dignified support, with every decision kept human.</p>
-              <p className="mt-5 max-w-2xl text-lg text-muted-foreground">A calm, consent-first space for AI-assisted preliminary risk screening and support prioritization for victims and complainants of the National Helpline Against Atrocities.</p>
-              <p className="mt-2 text-base text-muted-foreground" lang="hi">पीड़ितों और शिकायतकर्ताओं के लिए प्रारंभिक सहायता-प्राथमिकता प्रणाली।</p>
-            </div>
-            <div className="mt-9 grid max-w-4xl gap-4 md:grid-cols-2">
-              <Link to="/victim" className="group rounded-lg bg-primary p-6 text-primary-foreground shadow-lift transition-transform hover:-translate-y-1 sm:p-8">
-                <HeartHandshake className="h-7 w-7" aria-hidden="true" />
-                <span className="mt-7 flex items-center justify-between gap-4 font-display text-xl font-bold">I need support <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
-                <span className="mt-2 block text-sm leading-relaxed text-primary-foreground/75">Share only what you choose, in your own words. You can pause or leave at any time.</span>
+            <h1 className="mt-6 text-4xl leading-tight font-bold text-primary sm:text-5xl">SAHAYAK</h1>
+            <p className="mt-4 font-display text-2xl leading-relaxed text-foreground sm:text-3xl">
+              {t("heroTagline")}
+            </p>
+            <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{t("heroSub")}</p>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <Link
+                to="/victim"
+                className="group rounded-lg bg-primary p-6 text-primary-foreground shadow-lift transition-transform hover:-translate-y-1 sm:p-8"
+              >
+                <HeartHandshake className="h-8 w-8" aria-hidden="true" />
+                <span className="mt-6 flex items-center justify-between gap-4 font-display text-2xl font-bold">
+                  {t("iNeedSupport")}
+                  <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </span>
+                <span className="mt-2 block text-base leading-relaxed text-primary-foreground/80">
+                  {t("iNeedSupportSub")}
+                </span>
               </Link>
-              <Link to="/officer" className="group rounded-lg border border-border bg-card p-6 text-foreground shadow-card transition-transform hover:-translate-y-1 hover:border-teal sm:p-8">
-                <UserCheck className="h-7 w-7 text-teal" aria-hidden="true" />
-                <span className="mt-7 flex items-center justify-between gap-4 font-display text-xl font-bold text-primary">I am an officer or counsellor <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
-                <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">Review support priorities, document human decisions, and follow the audit trail.</span>
+              <Link
+                to="/officer"
+                className="group rounded-lg border border-border bg-card p-6 text-foreground shadow-card transition-transform hover:-translate-y-1 hover:border-teal sm:p-8"
+              >
+                <UserCheck className="h-8 w-8 text-teal" aria-hidden="true" />
+                <span className="mt-6 flex items-center justify-between gap-4 font-display text-xl font-bold text-primary">
+                  {t("iAmOfficer")}
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </span>
+                <span className="mt-2 block text-base leading-relaxed text-muted-foreground">
+                  {t("iAmOfficerSub")}
+                </span>
               </Link>
             </div>
-            <p className="mt-6 max-w-4xl rounded-md border border-amber/40 bg-amber-soft px-4 py-3 text-sm text-amber-foreground">Demo prototype using synthetic data. This system does not replace trained professionals.</p>
+
+            <p className="mt-6 rounded-md border border-amber/40 bg-amber-soft px-4 py-3 text-sm text-amber-foreground">
+              {t("demoNotice")}
+            </p>
           </div>
         </section>
 
         <section className="border-y border-border bg-card" aria-labelledby="process-heading">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase text-teal-foreground">Clear by design</p>
-              <h2 id="process-heading" className="mt-3 text-3xl font-bold text-primary">What happens after you share</h2>
-              <p className="mt-4 text-muted-foreground">Nothing is automatic. The system organizes information so a trained person can decide how best to help.</p>
-            </div>
-            <ol className="mt-10 grid gap-8 border-t border-border pt-8 md:grid-cols-3">
-              <li><span className="text-sm font-semibold text-teal">01</span><h3 className="mt-3 text-lg font-bold text-primary">You stay in control</h3><p className="mt-2 text-sm text-muted-foreground">Consent comes first. Share text or simulated voice input, and stop whenever you need.</p></li>
-              <li><span className="text-sm font-semibold text-teal">02</span><h3 className="mt-3 text-lg font-bold text-primary">Support needs are summarized</h3><p className="mt-2 text-sm text-muted-foreground">A transparent 0–100 screening index and suggested support actions are prepared.</p></li>
-              <li><span className="text-sm font-semibold text-teal">03</span><h3 className="mt-3 text-lg font-bold text-primary">A person reviews it</h3><p className="mt-2 text-sm text-muted-foreground">A trained counsellor or authorized officer makes every final decision.</p></li>
+          <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+            <h2 id="process-heading" className="text-3xl font-bold text-primary">
+              {t("stepsTitle")}
+            </h2>
+            <ol className="mt-8 grid gap-6 md:grid-cols-3">
+              {steps.map((s) => (
+                <li key={s.n} className="rounded-xl border border-border bg-background p-5">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-teal-soft font-bold text-teal-foreground">
+                    {s.n}
+                  </span>
+                  <h3 className="mt-3 text-lg font-bold text-primary">{s.title}</h3>
+                  <p className="mt-2 text-base text-muted-foreground">{s.body}</p>
+                </li>
+              ))}
             </ol>
-            <p className="mt-10 max-w-4xl border-l-4 border-teal bg-navy-soft px-5 py-4 text-sm">This is a preliminary screening result, not a clinical diagnosis. A trained counsellor or authorized officer must review the case.</p>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20" aria-labelledby="features-heading">
-          <h2 id="features-heading" className="sr-only">
-            Key capabilities
-          </h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            {FEATURES.map(({ icon: Icon, title, body }) => (
-              <article key={title} className="border-t border-border pt-6">
-                <span
-                  aria-hidden="true"
-                  className="flex h-11 w-11 items-center justify-center rounded-md bg-teal-soft text-teal-foreground"
-                >
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="mt-4 text-lg font-semibold text-primary">{title}</h3>
-                <p className="mt-2 text-muted-foreground">{body}</p>
-              </article>
-            ))}
+            <p className="mt-8 border-l-4 border-teal bg-navy-soft px-5 py-4 text-sm">{t("disclaimer")}</p>
           </div>
         </section>
       </main>
