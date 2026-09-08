@@ -194,6 +194,8 @@ function AssessmentPage() {
                 <Link to="/victim">Add something else</Link>
               </Button>
             </div>
+
+            <TelePsychiatryNetwork />
           </div>
         </div>
       </main>
