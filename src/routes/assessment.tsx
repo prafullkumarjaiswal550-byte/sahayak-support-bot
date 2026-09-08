@@ -4,6 +4,7 @@ import { AppFooter, AppHeader } from "@/components/sahayak/AppHeader";
 import { Disclaimer } from "@/components/sahayak/Brand";
 import { Gauge } from "@/components/sahayak/Gauge";
 import { RiskBadge } from "@/components/sahayak/RiskBadge";
+import { TelePsychiatryNetwork } from "@/components/sahayak/TelePsychiatryNetwork";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ACTION_LABELS, INDICATOR_LABELS, PRIORITY_STYLES } from "@/lib/sahayak/labels";
